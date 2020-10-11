@@ -75,7 +75,7 @@ defmodule BlockScout.Mixfile do
       # Documentation
       {:ex_doc, "~> 0.19.0", only: [:dev]},
       # Code coverage
-      {:excoveralls, "~> 0.13.1"},
+      {:excoveralls, "~> 0.12.3"},
       {:number, "~> 1.0.1"}
     ]
   end
