@@ -80,12 +80,14 @@ defmodule Indexer.Transform.Blocks do
     # First byte represents compression which can be ignored
     # Private key is the last 64 bytes
     {:ok, <<_compression::bytes-size(1), private_key::binary>>} =
-      :libsecp256k1.ecdsa_recover_compact(signature_hash, r <> s, :uncompressed, v)
+      LibNewChain.newchain_recover_public_key_ex(signature_hash, r <> s, v)
 
     # Public key comes from the last 20 bytes
     <<_::bytes-size(12), public_key::binary>> = :keccakf1600.hash(:sha3_256, private_key)
 
     miner_address = Base.encode16(public_key, case: :lower)
     "0x" <> miner_address
+
+
   end
 end
