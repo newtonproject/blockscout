@@ -79,6 +79,12 @@ defmodule BlockScoutWeb.Chain do
   def from_param("0x" <> number_string = param) when byte_size(number_string) == @tx_block_hash_len,
     do: block_or_transaction_from_param(param)
 
+  def from_param("NEW1" <> _rest = param) do
+    param
+    |> NewChain.Address.newAddress2HexAddress
+    |> address_from_param
+  end
+
   def from_param(param) when byte_size(param) == @address_hash_len,
     do: address_from_param("0x" <> param)
 

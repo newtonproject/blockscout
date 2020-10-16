@@ -11,15 +11,31 @@ defmodule NewChain.Address do
       case Base.decode16(address, case: :mixed) do
         {:ok, binaryAddress} ->
           hexChainId = Integer.to_string(chainId, 16)
-          binaryChainId =  case rem(String.length(hexChainId),2) do
+          binaryChainId = case rem(String.length(hexChainId), 2) do
             0 -> Base.decode16!(hexChainId, case: :mixed)
             1 -> Base.decode16!("0" <> hexChainId, case: :mixed)
           end
-          "NEW" <> ExWallet.Base58.check_encode(Base.decode16!("00") <> binaryChainId <> binaryAddress)
+          "NEW" <> B58.encode58_check!(binaryChainId <> binaryAddress, 0)
         :error ->
           hexAddress
       end
     end
+  end
+
+  def newAddress2HexAddress(newAddress) when is_binary(newAddress) do
+    if(String.length(newAddress) < 38 || String.starts_with?(newAddress, "NEW") == false) do
+      newAddress
+    else
+      {_prefix, data} = String.split_at(newAddress, 3)
+      case B58.decode58_check(data) do
+        {:ok, {chainIdAndBinaryAddress, _version}} ->
+          <<_chainId :: bytes - size(2), binaryAddress :: bits>> = chainIdAndBinaryAddress
+          "0x" <> Base.encode16(binaryAddress, case: :lower)
+        {:error, _message} ->
+          newAddress
+      end
+    end
+
   end
 
   def trimmedNewAddressEasy(address, chainId \\ 1012) when is_integer(chainId) do

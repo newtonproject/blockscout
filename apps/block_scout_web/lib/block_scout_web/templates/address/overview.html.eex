@@ -59,7 +59,11 @@
               <% end %>
             </span>
           </h1>
-          <h3 class="address-detail-hash-title <%= if BlockScoutWeb.AddressView.contract?(@address) do %>contract-address<% end %>" data-test="address_detail_hash"><%= NewChain.Address.fullNewAddressEasy(@address) %></h3>
+          <%= if BlockScoutWeb.AddressView.contract?(@address) do %>
+          <h3 class="address-detail-hash-title contract-address" data-test="address_detail_hash"><%= NewChain.Address.fullNewAddressEasy(@address) %></h3>
+          <% else %>
+          <h3 class="address-detail-hash-title" data-test="address_detail_hash"><%= NewChain.Address.fullNewAddressEasy(@address) %></h3>
+          <% end %>
           <div class="d-flex flex-column flex-lg-row justify-content-start text-muted">
             <%= if address_name = primary_name(@address) do %>
               <strong class="mr-4 mb-2 text-dark" title="<%= address_name %>">
@@ -94,7 +98,7 @@
             <span class="text-muted" data-test="address_contract_creator">
               <%= if from_address_hash do %>
                 <%= gettext "Created by" %> <%= link(
-                  trimmed_hash(from_address_hash(@address)),
+                  NewChain.Address.trimmedNewAddressEasy(from_address_hash(@address)),
                   to: address_path(@conn, :show, from_address_hash(@address))
                 ) %>
 
