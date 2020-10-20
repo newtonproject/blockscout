@@ -43,7 +43,7 @@ defmodule NewChain.Address do
       address
       |> to_string
       |> hexAddress2NewAddress(chainId)
-    "#{String.slice(newAddress, 0..6)}–#{String.slice(newAddress, -5..-1)}"
+    "#{String.slice(newAddress, 0..8)}···#{String.slice(newAddress, -6..-1)}"
   end
 
   def fullNewAddressEasy(address, chainId \\ 1012) when is_integer(chainId) do
