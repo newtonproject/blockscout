@@ -187,7 +187,7 @@ defmodule BlockScoutWeb.WebRouter do
         as: :coin_balance_by_day
       )
     end
-
+    resources("/token", Tokens.TokenController, only: [:show], as: :compatibility_token)
     resources "/tokens", Tokens.TokenController, only: [:show], as: :token do
       resources(
         "/token-transfers",
