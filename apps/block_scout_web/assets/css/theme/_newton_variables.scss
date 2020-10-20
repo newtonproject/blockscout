@@ -1,0 +1,106 @@
+// general
+$primary: #3E4C56;
+$secondary: #20C5A0;
+$tertiary: #11A1F1;
+$additional-font: #fff;
+$accent-primary: #11A1F1;
+
+// footer
+$footer-background-color: #07131F;
+$footer-title-color: #8A96A1;
+$footer-text-color: #D7E2ED;
+$footer-item-disc-color: $secondary;
+.footer-logo { filter: brightness(0) invert(1); }
+
+// dashboard
+$dashboard-line-color-price: $tertiary; // price left border
+$dashboard-line-color-market: $secondary;
+$dashboard-banner-chart-legend-label-color: #8A96A1;
+$dashboard-stats-item-label-color: $dashboard-banner-chart-legend-label-color;
+$dashboard-banner-chart-legend-value-color: #D7E2ED; // chart labels
+$dashboard-stats-item-value-color: #D7E2ED; // stat values
+
+$dashboard-stats-item-border-color: $secondary; // stat border
+
+$dashboard-banner-gradient-start: $primary; // gradient begin
+
+$dashboard-banner-gradient-end: lighten($primary, 5); // gradient end
+
+$dashboard-banner-network-plain-container-background-color: $primary; // stats bg
+
+
+// navigation
+.navbar { box-shadow: 0px 0px 30px 0px rgba(21, 53, 80, 0.12); } // header shadow
+$dropdown-menu-item-hover-color: $primary !default;
+$dropdown-menu-item-hover-background: rgba($primary, .1) !default;
+$header-icon-color-hover: $primary;
+$header-icon-border-color-hover: $primary;
+
+// buttons
+$btn-line-bg: #fff; // button bg
+$btn-line-color: $primary; // button border and font color && hover bg color
+$btn-copy-color: $primary; // btn copy
+$btn-qr-color: $primary; // btn qr-code
+$btn-address-card-icon-color: $primary; // btn address color
+
+//links & tile
+$tile-body-a-color: $accent-primary;
+$tile-type-block-color: $accent-primary;
+$tile-type-progress-bar-color: $accent-primary;
+a.tile-title { color: $accent-primary !important; }
+
+// card
+$card-background-1: $primary;
+$card-tab-active: $primary;
+
+.layout-container {
+	.dashboard-banner-container {
+	  background-image: linear-gradient(
+	    to bottom,
+	    $dashboard-banner-gradient-start,
+	    $dashboard-banner-gradient-end
+	  );
+	}
+}
+
+// Badges
+$badge-neutral-color: $primary;
+$badge-neutral-background-color: rgba($primary, .1);
+$api-text-monospace-color: $primary;
+
+// Badges
+$badge-neutral-color: $blue !default;
+$badge-neutral-background-color: rgba($blue, .1) !default;
+$api-text-monospace-color: $primary;
+$badge-success-color: $success !default;
+$badge-success-background-color: rgba($badge-success-color, 0.1) !default;
+$badge-danger-color: $warning !default;
+$badge-danger-background-color: rgba($badge-danger-color, 0.1) !default;
+
+// Tokens dropdown
+.token-balance-dropdown[aria-labelledby="dropdown-tokens"] {
+  .dropdown-items .dropdown-item:hover {
+    color: $primary !important;
+  }
+}
+
+// Dark theme
+$dark-primary: #D7E2ED;
+$dark-secondary: #87e1a9;
+$dark-primary-alternate: #1A1F2A; 
+
+$body-dark: #000000; // body background
+$dark-bg: #1A1F2A; // hero shade
+$dark-light-bg: #1C2330; // pills bg shade
+$dark-light: #31353F; // tile light top share
+$labels-dark: #8A96A1; // header nav, labels
+
+// Typography
+$common-link-color: $accent-primary !default;
+$blue: #11A1F1 !default;
+$success: #20C5A0 !default;
+$warning: #FF5949 !default;
+
+*[class$="-label"] {
+	text-transform: uppercase !important;
+}
