@@ -1,81 +1,169 @@
-// general
+// General
 $primary: #3E4C56;
 $secondary: #20C5A0;
 $tertiary: #11A1F1;
 $additional-font: #fff;
 $accent-primary: #11A1F1;
+$label-color: #11A1F1;
+$tooltip-background-color: $secondary;
 
-// footer
+// Footer
 $footer-background-color: #07131F;
 $footer-title-color: #8A96A1;
 $footer-text-color: #D7E2ED;
 $footer-item-disc-color: $secondary;
 .footer-logo { filter: brightness(0) invert(1); }
 
-// dashboard
-$dashboard-line-color-price: $tertiary; // price left border
+// Dashboard
+$dashboard-line-color-price: $tertiary;
 $dashboard-line-color-market: $secondary;
 $dashboard-banner-chart-legend-label-color: #8A96A1;
 $dashboard-stats-item-label-color: $dashboard-banner-chart-legend-label-color;
-$dashboard-banner-chart-legend-value-color: #D7E2ED; // chart labels
-$dashboard-stats-item-value-color: #D7E2ED; // stat values
+$dashboard-banner-chart-legend-value-color: #D7E2ED;
+$dashboard-stats-item-value-color: #D7E2ED;
+$dashboard-stats-item-border-color: $secondary;
+$dashboard-banner-gradient-start: $primary;
+$dashboard-banner-gradient-end: #1A1F2A;
+$dashboard-banner-network-plain-container-background-color: $primary;
 
-$dashboard-stats-item-border-color: $secondary; // stat border
-
-$dashboard-banner-gradient-start: $primary; // gradient begin
-
-$dashboard-banner-gradient-end: lighten($primary, 5); // gradient end
-
-$dashboard-banner-network-plain-container-background-color: $primary; // stats bg
-
-
-// navigation
+// Navigation
 .navbar { box-shadow: 0px 0px 30px 0px rgba(21, 53, 80, 0.12); } // header shadow
-$dropdown-menu-item-hover-color: $primary !default;
-$dropdown-menu-item-hover-background: rgba($primary, .1) !default;
+$dropdown-menu-item-hover-color: $primary;
+$dropdown-menu-item-hover-background: rgba($primary, .1);
 $header-icon-color-hover: $primary;
 $header-icon-border-color-hover: $primary;
+.navbar-nav {
+	.nav-link {
+		border-radius: 12px;
+		&:before {
+			opacity: 0;
+		}
+		&.active,
+		&:hover {
+			background: #F2F2F7;
+			@include media-breakpoint-up(lg) {
+				&:before {
+					opacity: 0 !important;
+				}
+			}
+		}
+	}
+	.show {
+		.nav-link {
+			background: #F2F2F7;
+			border-radius: 12px;
+		}
+	}
+}
 
-// buttons
+.navbar.navbar-primary {
+	.search-form {
+		@include media-breakpoint-up(xl) {
+      height: 40px !important;
+      margin-bottom: 0 !important;
+			margin-top: 0 !important;
+			margin-right: 8px !important;
+    }
+}
+} 
+
+.navbar.navbar-primary .form-control {
+	border-radius: 12px;
+	overflow: hidden !important;
+}
+
+// Buttons
 $btn-line-bg: #fff; // button bg
 $btn-line-color: $primary; // button border and font color && hover bg color
 $btn-copy-color: $primary; // btn copy
 $btn-qr-color: $primary; // btn qr-code
 $btn-address-card-icon-color: $primary; // btn address color
 
-//links & tile
-$tile-body-a-color: $accent-primary;
-$tile-type-block-color: $accent-primary;
-$tile-type-progress-bar-color: $accent-primary;
-a.tile-title { color: $accent-primary !important; }
-
-// card
+// Card
+$card-background-color: #fff;
+$card-tab-active:$primary;
+$card-default-border-radius: 12px;
+$card-horizontal-padding: 30px;
+$card-vertical-padding: 30px;
 $card-background-1: $primary;
-$card-tab-active: $primary;
+$card-background-1-text-color: #fff;
+$card-tab-icon-color: $success;
+$card-tab-icon-color-active: #fff;
 
 .layout-container {
-	.dashboard-banner-container {
-	  background-image: linear-gradient(
-	    to bottom,
-	    $dashboard-banner-gradient-start,
-	    $dashboard-banner-gradient-end
-	  );
-	}
+        .dashboard-banner-container {
+          background-image: linear-gradient(
+            to bottom,
+            $dashboard-banner-gradient-start,
+            $dashboard-banner-gradient-end
+          );
+        }
+}
+
+.card-title {
+	font-size: 1.5em !important;
+	font-weight: 700 !important;
+  &.lg-card-title {
+    @media (max-width: 374px) {
+      font-size: 13px;
+    }
+  }
+  &.margin-bottom-md {
+    margin-bottom: 15px;
+  }
+  &.margin-bottom-sm {
+    margin-bottom: 10px;
+  }
+  &.margin-bottom-xs {
+    margin-bottom: 5px;
+  }
+  .card-title-container & {
+    line-height: 1.2;
+    margin: 0;
+    @include media-breakpoint-down(sm) {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+.card-tabs {
+	padding: 15px;
+	border-bottom: none !important;
+}
+
+.card-tab {
+  background-color: $card-background-color !important;
+  color: rgba($card-tab-active, .75) !important;
+  font-weight: normal !important;
+  height: 48px !important;
+	padding: 0 10px !important;
+	border-radius: 10px;
+	margin-right: 8px;
+
+  &:hover {
+    background-color: rgba($card-tab-active, .05) !important;
+    color: $card-tab-active !important;
+  }
+
+  &.active {
+    background-color: rgba($card-tab-active, .10) !important;
+		color: $card-tab-active !important;
+		font-weight: 700 !important;
+
+    .fa-check-circle {
+      color: $card-tab-icon-color-active;
+    }
+  }
 }
 
 // Badges
-$badge-neutral-color: $primary;
-$badge-neutral-background-color: rgba($primary, .1);
+$badge-neutral-color: $blue;
+$badge-neutral-background-color: rgba($blue, .1);
 $api-text-monospace-color: $primary;
-
-// Badges
-$badge-neutral-color: $blue !default;
-$badge-neutral-background-color: rgba($blue, .1) !default;
-$api-text-monospace-color: $primary;
-$badge-success-color: $success !default;
-$badge-success-background-color: rgba($badge-success-color, 0.1) !default;
-$badge-danger-color: $warning !default;
-$badge-danger-background-color: rgba($badge-danger-color, 0.1) !default;
+$badge-success-color: $success;
+$badge-success-background-color: rgba($badge-success-color, 0.1);
+$badge-danger-color: $warning;
+$badge-danger-background-color: rgba($badge-danger-color, 0.1);
 
 // Tokens dropdown
 .token-balance-dropdown[aria-labelledby="dropdown-tokens"] {
@@ -84,23 +172,83 @@ $badge-danger-background-color: rgba($badge-danger-color, 0.1) !default;
   }
 }
 
-// Dark theme
-$dark-primary: #D7E2ED;
-$dark-secondary: #87e1a9;
-$dark-primary-alternate: #1A1F2A; 
+// Typography
+$common-link-color: $accent-primary;
+$blue: #11A1F1;
+$success: #20C5A0;
+$warning: #FF5949;
 
+*[class$="-label"] {
+        text-transform: uppercase !important;
+}
+
+// Tile
+// $tile-type-block-color: $primary;
+// $tile-type-uncle-color: $cyan;
+// $tile-type-reorg-color: $purple;
+// $tile-type-emission-reward-color: $lilac;
+// $tile-type-transaction-color: $blue;
+// $tile-type-contract-call-color: $green;
+// $tile-type-contract-creation-color: $dark-purple;
+// $tile-type-token-transfer-color: $orange;
+// $tile-type-unique-token-color: $orange;
+// $tile-type-unique-token-image-color: $orange;
+// $tile-type-internal-transaction-color: $teal;
+// $tile-type-api-documentation-color: $primary;
+// $tile-type-progress-bar-color: $primary;
+// $tile-status-error-reason: #ff7986;
+// $tile-status-awaiting-internal-transactions: $warning;
+// $tile-padding: 1rem;
+// $tile-title-color: #333;
+// $tile-body-a-color: #5959d8;
+//links & tile
+$tile-body-a-color: $accent-primary;
+$tile-type-block-color: $accent-primary;
+$tile-type-progress-bar-color: $accent-primary;
+a.tile-title { color: $accent-primary !important; }
+
+.tile {
+	border: none !important;
+	border-top: none !important;
+	border-right: none !important;
+	border-bottom: none !important;
+	border-left: none !important;
+	border-radius: 8px !important;
+	overflow: hidden !important;
+	background: #ffffff !important;
+	box-shadow: 0px 0px 5px 0px rgba(21, 53, 80, 0.12);
+	transition: $transition-cont;
+}
+.tile:hover {
+	background: #F2F2F7 !important;
+}
+.tile.tile-muted {
+  border: 1px solid #F2F2F7 !important;
+}
+
+.tile.tile-type-transaction {
+	border: none !important;
+}
+
+.tile-transaction-type-block {
+	border-top: none !important;
+	border-right: none !important;
+	border-bottom: none !important;
+	border-left: none !important;
+}
+
+// Address
+.address-balance-text {
+  font-size: 1.5em !important;
+}
+
+
+// Dark theme
+$dark-primary: #11A1F1;
+$dark-secondary: #87e1a9;
+$dark-primary-alternate: #1A1F2A;
 $body-dark: #000000; // body background
 $dark-bg: #1A1F2A; // hero shade
 $dark-light-bg: #1C2330; // pills bg shade
 $dark-light: #31353F; // tile light top share
 $labels-dark: #8A96A1; // header nav, labels
-
-// Typography
-$common-link-color: $accent-primary !default;
-$blue: #11A1F1 !default;
-$success: #20C5A0 !default;
-$warning: #FF5949 !default;
-
-*[class$="-label"] {
-	text-transform: uppercase !important;
-}
