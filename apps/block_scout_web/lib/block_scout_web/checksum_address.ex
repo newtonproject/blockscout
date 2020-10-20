@@ -20,11 +20,21 @@ defmodule BlockScoutWeb.ChecksumAddress do
     check_checksum(conn, id, "address_id")
   end
 
+  def call(%Conn{params: %{"token_id" => id}} = conn, _opts) do
+    check_checksum(conn, id, "token_id")
+  end
+
   def call(conn, _), do: conn
 
   defp check_checksum(conn, id, param_name) do
     if Application.get_env(:block_scout_web, :checksum_address_hashes) do
-      case Chain.string_to_address_hash(id) do
+      hexAddress =
+        if(String.starts_with?(id, "NEW")) do
+          NewChain.Address.newAddress2HexAddress(id)
+        else
+          id
+        end
+      case Chain.string_to_address_hash(hexAddress) do
         {:ok, address_hash} ->
           checksummed_hash = Address.checksum(address_hash)
 
