@@ -7,6 +7,7 @@ use Mix.Config
 
 # General application configuration
 config :block_scout_web,
+  chain_id: System.get_env("NEWCHAIN_CHAIN_ID", "1012") |> String.to_integer,
   namespace: BlockScoutWeb,
   ecto_repos: [Explorer.Repo],
   version: System.get_env("BLOCKSCOUT_VERSION"),
