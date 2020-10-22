@@ -199,6 +199,9 @@ body.dark-theme-applied {
 			background-color: transparent;
 		}
 	}
+	.tile-bottom-contents {
+		background-color: rgba(#000, 0) !important;
+	}
 	.tile.tile-muted {
 		border: none !important;
 	}
@@ -224,11 +227,9 @@ body.dark-theme-applied {
 	.tile-type-loading {
 		background: $dark-light;
 	}
-	.tile-loader {
-		background: $dark-light;
-	}
+
 	.cube-animation-title {
-		color: $labels-dark;
+		color: $labels-dark !important;
 	}
 	.tile .tile-body a,
 	.tile span[data-address-hash] { color: $dark-primary; }
@@ -571,6 +572,10 @@ body.dark-theme-applied {
 		&:before {
 			background: linear-gradient(to right, $dark-bg 2%, lighten($dark-bg, 3) 18%, $dark-bg 33%);
 		}
+	}
+
+	.dark-block-loader {
+		background-color: $dark-bg !important;
 	}
 
 	// Verify other explorers
