@@ -304,6 +304,7 @@ body.dark-theme-applied {
 	// dropdown
 	.dropdown-menu {
 		background-color: $dark-light;
+		border: none;
 	}
 
 	.dropdown-item {
@@ -727,7 +728,7 @@ body.dark-theme-applied {
 
 	// pre
 	.pre-scrollable.line-numbers, .hljs {
-		background: $dark-light;
+		background: none;
 		color: #fff;
 	}
 
@@ -748,8 +749,8 @@ body.dark-theme-applied {
 	}
 
 	.line-numbers [data-line-number]:before {
-		color: #3f436b !important;
-		border-right-color: #3f436b !important;
+		color: $labels-dark !important;
+		border-right-color: $labels-dark !important;
 	}
 
 	// 'text dark' label
