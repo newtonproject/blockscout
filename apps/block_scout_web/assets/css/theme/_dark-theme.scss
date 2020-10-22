@@ -1,3 +1,33 @@
+// Newton Theme Color
+$ntc-primary: #15202b;
+$ntc-secondary: #3E4C56;
+$ntc-deep: #27323B;
+$ntc-light: #D7E2ED;
+$ntc-lightest: #F5F7FB;
+$ntc-accent: #11A1F1;
+$ntc-accent-lighter: #41B4F4;
+$ntc-accent-deeper: #1184C5;
+$ntc-accent-2: #20C5A0;
+$ntc-accent-2-lighter: #36CAA9;
+$ntc-accent-2-deeper: #179177;
+$ntc-bg: #fbfafc;
+$ntc-text: #000000;
+$ntc-text-secondary: $ntc-primary;
+$ntc-text-label: $ntc-primary;
+$ntc-text-info: $ntc-secondary;
+$ntc-success: #20C5A0;
+$ntc-warning: #FF9500;
+$ntc-error: #FF5949;
+$ntc-info: #B1BAC1;
+$ntc-green: #20C5A0;
+$ntc-blue: #11A1F1;
+$ntc-red: #FF5949;
+$ntc-orange: #FF9500;
+// Newton Theme Size in px
+$ntss-sm: 8px;
+$ntss-md: 12px;
+$ntss-lg: 16px;
+
 // Dark theme
 $dark-primary: $ntc-accent;
 $dark-secondary: $ntc-accent-2;
