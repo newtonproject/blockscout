@@ -28,6 +28,7 @@ $ntss-sm: 8px;
 $ntss-md: 12px;
 $ntss-lg: 16px;
 
+
 // General
 $primary: $ntc-secondary;
 $secondary: $ntc-green;
@@ -187,10 +188,6 @@ form .input-group .awesomplete li:hover mark {
 .navbar.navbar-primary .navbar-nav .nav-link:hover.active-icon { //network
   color: white !important;
   background-color: $ntc-green !important;
-}
-
-#dark-mode-changer {
-  display: none !important;
 }
 
 // Buttons
@@ -419,12 +416,3 @@ $tooltip-color: white;
   text-transform: uppercase !important;
 }
 
-// Dark theme
-$dark-primary: #11A1F1;
-$dark-secondary: #87e1a9;
-$dark-primary-alternate: #1A1F2A;
-$body-dark: #000000; // body background
-$dark-bg: #1A1F2A; // hero shade
-$dark-light-bg: #1C2330; // pills bg shade
-$dark-light: #31353F; // tile light top share
-$labels-dark: #8A96A1; // header nav, labels
