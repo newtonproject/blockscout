@@ -28,6 +28,7 @@ $ntss-sm: 8px;
 $ntss-md: 12px;
 $ntss-lg: 16px;
 
+
 // General
 $primary: $ntc-secondary;
 $secondary: $ntc-green;
@@ -189,10 +190,6 @@ form .input-group .awesomplete li:hover mark {
   background-color: $ntc-green !important;
 }
 
-#dark-mode-changer {
-  display: none !important;
-}
-
 // Buttons
 $btn-line-bg:white; 
 $btn-line-color: $ntc-accent-2;
@@ -202,6 +199,15 @@ $btn-address-card-icon-color: $ntc-accent-2;
 
 a.btn-line {
   border-radius: $ntss-md !important;
+}
+
+// Pagination
+.pagination-container .pagination .page-link {
+  border: none;
+  &.no-hover {
+    background-color: white;
+    border: none;
+  }
 }
 
 // Card
@@ -263,7 +269,7 @@ $card-tab-icon-color-active: white;
     color: $ntc-secondary !important;
     font-weight: 700 !important;
     .fa-check-circle {
-      color: $ntc-primary !important;
+      color: $ntc-success !important;
     }
   }
 }
@@ -419,12 +425,3 @@ $tooltip-color: white;
   text-transform: uppercase !important;
 }
 
-// Dark theme
-$dark-primary: #11A1F1;
-$dark-secondary: #87e1a9;
-$dark-primary-alternate: #1A1F2A;
-$body-dark: #000000; // body background
-$dark-bg: #1A1F2A; // hero shade
-$dark-light-bg: #1C2330; // pills bg shade
-$dark-light: #31353F; // tile light top share
-$labels-dark: #8A96A1; // header nav, labels
