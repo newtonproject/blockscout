@@ -288,9 +288,14 @@ body.dark-theme-applied {
 		color: $labels-dark;
 		border-color: $dark-light;
 		background-color: $dark-light;
+		border: none;
+		&.no-hover {
+			background-color: $ntc-primary;
+		}
 		&:not(.no-hover):hover {
 			color: #fff;
-			background-color: $dark-primary;
+			background-color: rgba(#000, .5);
+			border: none;
 			path {
 				fill: #fff;
 			}

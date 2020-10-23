@@ -201,6 +201,15 @@ a.btn-line {
   border-radius: $ntss-md !important;
 }
 
+// Pagination
+.pagination-container .pagination .page-link {
+  border: none;
+  &.no-hover {
+    background-color: white;
+    border: none;
+  }
+}
+
 // Card
 $card-background-color: white;
 $card-tab-active: $ntc-primary;
