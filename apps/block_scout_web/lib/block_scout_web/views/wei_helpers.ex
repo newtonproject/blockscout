@@ -73,7 +73,7 @@ defmodule BlockScoutWeb.WeiHelpers do
     end
   end
 
-  defp display_unit(:wei), do: gettext("Wei")
-  defp display_unit(:gwei), do: gettext("Gwei")
-  defp display_unit(:ether), do: gettext("Ether")
+  defp display_unit(:wei), do: gettext("Isaac")
+  defp display_unit(:gwei), do: gettext("GIsaac")
+  defp display_unit(:ether), do: gettext("NEW")
 end
