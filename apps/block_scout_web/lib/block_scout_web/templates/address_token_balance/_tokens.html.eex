@@ -1,6 +1,6 @@
-<div data-token-type="<%= @type %>">
+<div data-token-type="<%= NewAsset.convertType(@type) %>">
   <h6 class="dropdown-header">
-    <%= @type %> (<span data-number-of-tokens-by-type="<%= @type %>"><%= Enum.count(@token_balances)%></span>)
+    <%= NewAsset.convertType(@type) %> (<span data-number-of-tokens-by-type="<%= NewAsset.convertType(@type) %>"><%= Enum.count(@token_balances)%></span>)
   </h6>
 
   <%= for token_balance <- sort_by_name(@token_balances) do %>
