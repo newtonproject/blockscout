@@ -70,7 +70,7 @@
                   </a>
                 </span>
               <% end %>
-              <span class="mr-4"> <%= @token.type %> </span>
+              <span class="mr-4"> <%= NewAsset.convertType(@token.type) %> </span>
               <span class="mr-4"><%= @total_token_transfers %> <%= gettext "Transfers" %></span>
               <%= if decimals?(@token) do %>
                 <span class="mr-4"><%= @token.decimals %> <%= gettext "Decimals" %></span>
