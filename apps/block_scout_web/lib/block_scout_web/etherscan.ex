@@ -1087,7 +1087,7 @@ defmodule BlockScoutWeb.Etherscan do
   @account_eth_get_balance_action %{
     name: "eth_get_balance",
     description:
-      "Mimics Ethereum JSON RPC's eth_getBalance. Returns the balance as of the provided block (defaults to latest)",
+      "Mimics NewChain JSON RPC's eth_getBalance. Returns the balance as of the provided block (defaults to latest)",
     required_params: [
       %{
         key: "address",
@@ -1789,8 +1789,8 @@ defmodule BlockScoutWeb.Etherscan do
   @token_gettoken_action %{
     name: "getToken",
     description:
-      "Get <a href='https://github.com/ethereum/EIPs/issues/20'>ERC-20</a> " <>
-        "or <a href='https://github.com/ethereum/EIPs/issues/721'>ERC-721</a> token by contract address.",
+      "Get <a href='https://github.com/newtonproject/NEPs/issues/6'>NRC-6</a> " <>
+        "or <a href='https://github.com/newtonproject/NEPs/issues/7'>NRC-7</a> token by contract address.",
     required_params: [
       %{
         key: "contractaddress",
@@ -1828,8 +1828,8 @@ defmodule BlockScoutWeb.Etherscan do
   @stats_tokensupply_action %{
     name: "tokensupply",
     description:
-      "Get <a href='https://github.com/ethereum/EIPs/issues/20'>ERC-20</a> or " <>
-        "<a href='https://github.com/ethereum/EIPs/issues/721'>ERC-721</a> " <>
+      "Get <a href='https://github.com/newtonproject/NEPs/issues/6'>NRC-6</a> or " <>
+        "<a href='https://github.com/newtonproject/NEPs/issues/7'>NRC-7</a> " <>
         " token total supply by contract address.",
     required_params: [
       %{
@@ -1868,7 +1868,7 @@ defmodule BlockScoutWeb.Etherscan do
 
   @stats_ethsupplyexchange_action %{
     name: "ethsupplyexchange",
-    description: "Get total supply in Wei from exchange.",
+    description: "Get total supply in Isaac from exchange.",
     required_params: [],
     optional_params: [],
     responses: [
@@ -1894,7 +1894,7 @@ defmodule BlockScoutWeb.Etherscan do
 
   @stats_ethsupply_action %{
     name: "ethsupply",
-    description: "Get total supply in Wei from DB.",
+    description: "Get total supply in Isaac from DB.",
     required_params: [],
     optional_params: [],
     responses: [
@@ -1909,7 +1909,7 @@ defmodule BlockScoutWeb.Etherscan do
             message: @message_type,
             result: %{
               type: "integer",
-              description: "The total supply in Wei from DB.",
+              description: "The total supply in Isaac from DB.",
               example: ~s("101959776311500000000000000")
             }
           }
@@ -1969,7 +1969,7 @@ defmodule BlockScoutWeb.Etherscan do
 
   @block_eth_block_number_action %{
     name: "eth_block_number",
-    description: "Mimics Ethereum JSON RPC's eth_blockNumber. Returns the lastest block number",
+    description: "Mimics NewChain JSON RPC's eth_blockNumber. Returns the lastest block number",
     required_params: [],
     optional_params: [
       %{

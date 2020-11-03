@@ -17,7 +17,7 @@ to: address_contract_path(@conn, :index, metadata_for_verification.address_hash)
       <%= render BlockScoutWeb.IconsView, "_inactive_icon.html" %>
     </span>
      <h2 style="margin-top: -2px;">Disconnected</h2>
-    <button connect-metamask class="button btn-line ml-4">Connect to Metamask</button>
+    <button connect-metamask class="button btn-line ml-4">Connect to NewMask</button>
   </div>
   <div connected-to class="connect-container hidden">
     <span style="margin-top: -2px;" class="mr-2">
