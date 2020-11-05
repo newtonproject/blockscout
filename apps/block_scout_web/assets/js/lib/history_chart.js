@@ -47,7 +47,8 @@ const config = {
           beginAtZero: true,
           callback: (value, _index, _values) => `$${numeral(value).format('0,0.00')}`,
           maxTicksLimit: 4,
-          fontColor: sassVariables.dashboardBannerChartAxisFontColor
+          fontColor: sassVariables.dashboardBannerChartAxisFontColor,
+          display: false
         }
       }, {
         id: 'marketCap',
@@ -58,7 +59,8 @@ const config = {
         ticks: {
           callback: (_value, _index, _values) => '',
           maxTicksLimit: 6,
-          drawOnChartArea: false
+          drawOnChartArea: false,
+          display: false
         }
       }, {
         id: 'numTransactions',
@@ -71,7 +73,8 @@ const config = {
           beginAtZero: true,
           callback: (value, _index, _values) => `${numeral(value).format('0,0')}`,
           maxTicksLimit: 4,
-          fontColor: sassVariables.dashboardBannerChartAxisFontColor
+          fontColor: sassVariables.dashboardBannerChartAxisFontColor,
+          display: false
         }
       }]
     },
