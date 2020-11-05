@@ -65,6 +65,9 @@ $dashboard-banner-network-plain-container-background-color: $ntc-secondary;
       $dashboard-banner-gradient-start 0%, 
       $dashboard-banner-gradient-end 100%
     );
+    .dashboard-banner {
+      padding-bottom: 1em;
+    }
   }
 }
 .layout-container {
@@ -128,6 +131,9 @@ img.navbar-logo {
       background: $ntc-lightest;
       border-radius: $ntss-md;
     }
+  }
+  .dropdown-item:hover {
+    background: rgba($ntc-light, 0.5);
   }
 }
 
@@ -221,6 +227,10 @@ $card-background-1: $ntc-primary;
 $card-background-1-text-color: white;
 $card-tab-icon-color: $ntc-success;
 $card-tab-icon-color-active: white;
+
+.card {
+  overflow: hidden;
+}
 
 .card-title {
   font-size: 1.5em !important;
