@@ -147,7 +147,7 @@ body.dark-theme-applied {
 	}
 
 	.card-header {
-		border-bottom-color: darken($labels-dark, 30);
+		border-bottom-color: $ntc-secondary;
 	}
 
 	.address-detail-hash-title {
@@ -155,7 +155,7 @@ body.dark-theme-applied {
 	}
 
 	.card-tabs {
-		border-bottom-color: darken($labels-dark, 30);
+		border-bottom-color: $ntc-secondary;
 	}
 
 	.card-tab {
@@ -334,13 +334,13 @@ body.dark-theme-applied {
 		color: $labels-dark;
 	}
 	.stakes-td {
-		border-bottom-color: darken($labels-dark, 30);
+		border-bottom-color: $ntc-secondary;
 	}
 	.table th, .table td {
-		border-top-color: darken($labels-dark, 30);
+		border-top-color: $ntc-secondary;
 	}
 	hr {
-		border-top-color: darken($labels-dark, 30);
+		border-top-color: $ntc-secondary;
 	}
 
 	// api's
@@ -348,7 +348,7 @@ body.dark-theme-applied {
 		background-color: $dark-light;
 	}
 	.api-doc-list-item {
-		border-bottom-color: darken($labels-dark, 30);
+		border-bottom-color: $ntc-secondary;
 	}
 	.card-subtitle,
 	.api-anchors-list-item-title,
@@ -419,7 +419,7 @@ body.dark-theme-applied {
 	}
 	.network-selector-item,
 	.network-selector-tabs-container {
-		border-bottom-color: darken($labels-dark, 30);
+		border-bottom-color: $ntc-secondary;
 	}
 	.network-selector-item-title {
 		color: #fff;
@@ -457,7 +457,7 @@ body.dark-theme-applied {
 		color: $labels-dark;
 	}
 	.border-bottom {
-		border-bottom-color: darken($labels-dark, 30) !important;
+		border-bottom-color: $ntc-secondary !important;
 	}
 
 	// coin balance history chart
@@ -524,7 +524,7 @@ body.dark-theme-applied {
 		color: $labels-dark;
 	}
 	.smart-contract-form-buttons {
-		border-top-color: darken($labels-dark, 30);
+		border-top-color: $ntc-secondary;
 		.btn-no-border {
 			background-color: $dark-light;
 			border-color: $dark-light;
@@ -536,12 +536,12 @@ body.dark-theme-applied {
 		}
 	}
 	.add-contract-libraries-wrapper {
-		border-top-color: darken($labels-dark, 30);
+		border-top-color: $ntc-secondary;
 	}
 
 	.token-tile-view-more:before, .token-tile-view-more:after {
-		border-top-color: darken($labels-dark, 30);
-		border-bottom-color: darken($labels-dark, 30);
+		border-top-color: $ntc-secondary;
+		border-bottom-color: $ntc-secondary;
 	}
 
 	// Form Controlls
@@ -585,9 +585,9 @@ body.dark-theme-applied {
 
 	// Verify other explorers
 	.verify-other-explorers-elem {
-		border-color: darken($labels-dark, 30);
+		border-color: $ntc-secondary;
 		.exp-logo {
-			border-right-color: darken($labels-dark, 30);
+			border-right-color: $ntc-secondary;
 		}
 		.exp-content {
 			h3 {
@@ -636,7 +636,7 @@ body.dark-theme-applied {
 		}
 
 		.modal-footer {
-			border-top-color: darken($labels-dark, 30);
+			border-top-color: $ntc-secondary;
 		}
 
 		.modal-content {
@@ -672,10 +672,10 @@ body.dark-theme-applied {
 	}
 
 	.api-doc-parameters-list {
-		border-bottom-color: darken($labels-dark, 30);
+		border-bottom-color: $ntc-secondary;
 	}
 	.api-doc-parameters-container {
-		border-top-color: darken($labels-dark, 30);
+		border-top-color: $ntc-secondary;
 	}
 	.api-doc-tab {
 		color: $dark-primary !important;
@@ -727,10 +727,10 @@ body.dark-theme-applied {
 		color: #fff !important;
 	}
 	.table-bordered, .table-bordered td, .table-bordered th {
-		border-color: darken($labels-dark, 30);
+		border-color: $ntc-secondary;
 	}
 	.dark-theme-applied .table td, .dark-theme-applied .table th, .dark-theme-applied hr {
-		border-top-color: darken($labels-dark, 30);
+		border-top-color: $ntc-secondary;
 	}
 	.btn-copy-ico svg path {
 		fill: #fff;
@@ -779,7 +779,7 @@ body.dark-theme-applied {
 		}
 
 		.modal-footer {
-			border-top-color: darken($labels-dark, 30);
+			border-top-color: $ntc-secondary;
 		}
 
 		.modal-content {
@@ -839,7 +839,7 @@ body.dark-theme-applied {
 		color: $labels-dark !important;
 	}
 	.stakes-td {
-		border-color: rgba(#fff, .2) !important;
+		border-color: $ntc-secondary;
 	}
 }
 

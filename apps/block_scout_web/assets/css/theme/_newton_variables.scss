@@ -48,6 +48,7 @@ $footer-item-disc-color: $ntc-light;
 // Dashboard
 $dashboard-line-color-price: $ntc-accent;
 $dashboard-line-color-market: $ntc-accent-2;
+$dashboard-line-color-transactions: $ntc-accent-2;
 $dashboard-banner-chart-legend-label-color: $ntc-light;
 $dashboard-stats-item-label-color: $dashboard-banner-chart-legend-label-color;
 $dashboard-banner-chart-legend-value-color: white;
@@ -64,6 +65,9 @@ $dashboard-banner-network-plain-container-background-color: $ntc-secondary;
       $dashboard-banner-gradient-start 0%, 
       $dashboard-banner-gradient-end 100%
     );
+    .dashboard-banner {
+      padding-bottom: 1em;
+    }
   }
 }
 .layout-container {
@@ -127,6 +131,9 @@ img.navbar-logo {
       background: $ntc-lightest;
       border-radius: $ntss-md;
     }
+  }
+  .dropdown-item:hover {
+    background: rgba($ntc-light, 0.5);
   }
 }
 
@@ -425,3 +432,8 @@ $tooltip-color: white;
   text-transform: uppercase !important;
 }
 
+// Etc.
+.api-anchors-list {
+	border-radius: $ntss-md;
+	margin: $ntss-md;
+}
