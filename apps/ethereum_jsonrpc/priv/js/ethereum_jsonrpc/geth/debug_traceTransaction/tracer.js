@@ -345,7 +345,11 @@
             result.error = error
         } else {
             result.createdContractAddressHash = toHex(ctx.to);
-            result.createdContractCode = toHex(db.getCode(ctx.to));
+            if (toHex(ctx.input) != '0x') {
+              result.createdContractCode = toHex(db.getCode(ctx.to));
+            } else {
+              result.createdContractCode = '0x';
+            }
         }
     },
 
