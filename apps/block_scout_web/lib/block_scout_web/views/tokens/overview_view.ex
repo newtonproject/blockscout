@@ -1,9 +1,13 @@
 defmodule BlockScoutWeb.Tokens.OverviewView do
   use BlockScoutWeb, :view
 
+  alias Explorer.{Chain, CustomContractsHelpers}
   alias Explorer.Chain.{Address, SmartContract, Token}
+  alias Explorer.SmartContract.Helper
 
   alias BlockScoutWeb.{AccessHelpers, CurrencyHelpers, LayoutView}
+
+  import BlockScoutWeb.AddressView, only: [from_address_hash: 1]
 
   @tabs ["token-transfers", "token-holders", "read-contract", "inventory"]
   @etherscan_token_link "https://etherscan.io/token/"
@@ -40,12 +44,13 @@ defmodule BlockScoutWeb.Tokens.OverviewView do
   defp tab_name(["inventory"]), do: gettext("Inventory")
 
   def display_inventory?(%Token{type: "ERC-721"}), do: true
+  def display_inventory?(%Token{type: "ERC-1155"}), do: true
   def display_inventory?(_), do: false
 
   def smart_contract_with_read_only_functions?(
         %Token{contract_address: %Address{smart_contract: %SmartContract{}}} = token
       ) do
-    Enum.any?(token.contract_address.smart_contract.abi, &(&1["constant"] || &1["stateMutability"] == "view"))
+    Enum.any?(token.contract_address.smart_contract.abi, &Helper.queriable_method?(&1))
   end
 
   def smart_contract_with_read_only_functions?(%Token{contract_address: %Address{smart_contract: nil}}), do: false
@@ -54,9 +59,13 @@ defmodule BlockScoutWeb.Tokens.OverviewView do
   Get the total value of the token supply in USD.
   """
   def total_supply_usd(token) do
-    tokens = CurrencyHelpers.divide_decimals(token.total_supply, token.decimals)
-    price = token.usd_value
-    Decimal.mult(tokens, price)
+    if Map.has_key?(token, :custom_cap) && token.custom_cap do
+      token.custom_cap
+    else
+      tokens = CurrencyHelpers.divide_decimals(token.total_supply, token.decimals)
+      price = token.usd_value
+      Decimal.mult(tokens, price)
+    end
   end
 
   def foreign_bridged_token_explorer_link(token) do
@@ -102,6 +111,9 @@ defmodule BlockScoutWeb.Tokens.OverviewView do
 
       1 ->
         @etherscan_token_link
+
+      56 ->
+        "https://bscscan.com/token/"
 
       _ ->
         @etherscan_token_link

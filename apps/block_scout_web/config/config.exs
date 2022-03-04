@@ -23,25 +23,71 @@ config :block_scout_web, BlockScoutWeb.Chain,
   logo: System.get_env("LOGO"),
   logo_footer: System.get_env("LOGO_FOOTER"),
   logo_text: System.get_env("LOGO_TEXT"),
-  has_emission_funds: false
+  has_emission_funds: false,
+  staking_enabled: not is_nil(System.get_env("POS_STAKING_CONTRACT")),
+  staking_enabled_in_menu: System.get_env("ENABLE_POS_STAKING_IN_MENU", "false") == "true",
+  show_staking_warning: System.get_env("SHOW_STAKING_WARNING", "false") == "true",
+  show_maintenance_alert: System.get_env("SHOW_MAINTENANCE_ALERT", "false") == "true",
+  # how often (in blocks) the list of pools should autorefresh in UI (zero turns off autorefreshing)
+  staking_pool_list_refresh_interval: 5
 
 config :block_scout_web,
   link_to_other_explorers: System.get_env("LINK_TO_OTHER_EXPLORERS") == "true",
-  other_explorers: %{
-    "Etherscan" => "https://etherscan.io/",
-    "EtherChain" => "https://www.etherchain.org/",
-    "Bloxy" => "https://bloxy.info/"
-  },
+  other_explorers: System.get_env("OTHER_EXPLORERS"),
   other_networks: System.get_env("SUPPORTED_CHAINS"),
   webapp_url: System.get_env("WEBAPP_URL"),
   api_url: System.get_env("API_URL"),
   apps_menu: if(System.get_env("APPS_MENU", "false") == "true", do: true, else: false),
   external_apps: System.get_env("EXTERNAL_APPS"),
-  multi_token_bridge_mediator: System.get_env("MULTI_TOKEN_BRIDGE_MEDIATOR"),
-  foreign_json_rpc: System.get_env("FOREIGN_JSON_RPC"),
+  eth_omni_bridge_mediator: System.get_env("ETH_OMNI_BRIDGE_MEDIATOR"),
+  bsc_omni_bridge_mediator: System.get_env("BSC_OMNI_BRIDGE_MEDIATOR"),
+  amb_bridge_mediators: System.get_env("AMB_BRIDGE_MEDIATORS"),
+  foreign_json_rpc: System.get_env("FOREIGN_JSON_RPC", ""),
   gas_price: System.get_env("GAS_PRICE", nil),
   restricted_list: System.get_env("RESTRICTED_LIST", nil),
-  restricted_list_key: System.get_env("RESTRICTED_LIST_KEY", nil)
+  restricted_list_key: System.get_env("RESTRICTED_LIST_KEY", nil),
+  dark_forest_addresses: System.get_env("CUSTOM_CONTRACT_ADDRESSES_DARK_FOREST"),
+  dark_forest_addresses_v_0_5: System.get_env("CUSTOM_CONTRACT_ADDRESSES_DARK_FOREST_V_0_5"),
+  circles_addresses: System.get_env("CUSTOM_CONTRACT_ADDRESSES_CIRCLES"),
+  test_tokens_addresses: System.get_env("CUSTOM_CONTRACT_ADDRESSES_TEST_TOKEN"),
+  max_size_to_show_array_as_is: Integer.parse(System.get_env("MAX_SIZE_UNLESS_HIDE_ARRAY", "50")),
+  max_length_to_show_string_without_trimming: System.get_env("MAX_STRING_LENGTH_WITHOUT_TRIMMING", "2040"),
+  re_captcha_secret_key: System.get_env("RE_CAPTCHA_SECRET_KEY", nil),
+  re_captcha_client_key: System.get_env("RE_CAPTCHA_CLIENT_KEY", nil)
+
+global_api_rate_limit_value =
+  "API_RATE_LIMIT"
+  |> System.get_env("50")
+  |> Integer.parse()
+  |> case do
+    {integer, ""} -> integer
+    _ -> 50
+  end
+
+api_rate_limit_by_key_value =
+  "API_RATE_LIMIT_BY_KEY"
+  |> System.get_env("50")
+  |> Integer.parse()
+  |> case do
+    {integer, ""} -> integer
+    _ -> 50
+  end
+
+api_rate_limit_by_ip_value =
+  "API_RATE_LIMIT_BY_IP"
+  |> System.get_env("50")
+  |> Integer.parse()
+  |> case do
+    {integer, ""} -> integer
+    _ -> 50
+  end
+
+config :block_scout_web, :api_rate_limit,
+  global_limit: global_api_rate_limit_value,
+  limit_by_key: api_rate_limit_by_key_value,
+  limit_by_ip: api_rate_limit_by_ip_value,
+  static_api_key: System.get_env("API_RATE_LIMIT_STATIC_API_KEY", nil),
+  whitelisted_ips: System.get_env("API_RATE_LIMIT_WHITELISTED_IPS", nil)
 
 config :block_scout_web, BlockScoutWeb.Counters.BlocksIndexedCounter, enabled: true
 
@@ -132,6 +178,9 @@ config :block_scout_web, BlockScoutWeb.ApiRouter,
   wobserver_enabled: System.get_env("WOBSERVER_ENABLED") == "true"
 
 config :block_scout_web, BlockScoutWeb.WebRouter, enabled: System.get_env("DISABLE_WEBAPP") != "true"
+
+config :hammer,
+  backend: {Hammer.Backend.ETS, [expiry_ms: 60_000 * 60 * 4, cleanup_interval_ms: 60_000 * 10]}
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

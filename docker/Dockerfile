@@ -1,6 +1,23 @@
-FROM bitwalker/alpine-elixir-phoenix:1.10.3
+FROM bitwalker/alpine-elixir-phoenix:1.12
 
-RUN apk --no-cache --update add alpine-sdk gmp-dev automake libtool inotify-tools autoconf python
+RUN apk --no-cache --update add alpine-sdk gmp-dev automake libtool inotify-tools autoconf python3 file
+
+ENV GLIBC_REPO=https://github.com/sgerrand/alpine-pkg-glibc
+ENV GLIBC_VERSION=2.30-r0
+
+RUN set -ex && \
+    apk --update add libstdc++ curl ca-certificates && \
+    for pkg in glibc-${GLIBC_VERSION} glibc-bin-${GLIBC_VERSION}; \
+        do curl -sSL ${GLIBC_REPO}/releases/download/${GLIBC_VERSION}/${pkg}.apk -o /tmp/${pkg}.apk; done && \
+    apk add --allow-untrusted /tmp/*.apk && \
+    rm -v /tmp/*.apk && \
+    /usr/glibc-compat/sbin/ldconfig /lib /usr/glibc-compat/lib
+
+# Get Rust
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
+
+ENV PATH="$HOME/.cargo/bin:${PATH}"
+ENV RUSTFLAGS="-C target-feature=-crt-static"
 
 EXPOSE 4000
 
@@ -25,6 +42,8 @@ RUN if [ "$COIN" != "" ]; then sed -i s/"POA"/"${COIN}"/g apps/block_scout_web/p
 # Run forderground build and phoenix digest
 RUN mix compile
 
+RUN npm install npm@latest
+
 # Add blockscout npm deps
 RUN cd apps/block_scout_web/assets/ && \
     npm install && \
@@ -33,12 +52,6 @@ RUN cd apps/block_scout_web/assets/ && \
 
 RUN cd apps/explorer/ && \
     npm install && \
-    apk update && apk del --force-broken-world alpine-sdk gmp-dev automake libtool inotify-tools autoconf python
-
-# RUN mix do ecto.drop --force, ecto.create, ecto.migrate
+    apk update && apk del --force-broken-world alpine-sdk gmp-dev automake libtool inotify-tools autoconf python3
 
 RUN mix phx.digest
-
-# USER default
-
-# CMD ["mix", "phx.server"]

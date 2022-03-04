@@ -9,7 +9,19 @@ config :explorer, Explorer.Repo,
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox,
   # Default of `5_000` was too low for `BlockFetcher` test
-  ownership_timeout: :timer.minutes(1)
+  ownership_timeout: :timer.minutes(1),
+  timeout: :timer.seconds(60),
+  queue_target: 1000
+
+# Configure API database
+config :explorer, Explorer.Repo.Replica1,
+  database: "explorer_test",
+  hostname: "localhost",
+  pool: Ecto.Adapters.SQL.Sandbox,
+  # Default of `5_000` was too low for `BlockFetcher` test
+  ownership_timeout: :timer.minutes(1),
+  timeout: :timer.seconds(60),
+  queue_target: 1000
 
 config :explorer, Explorer.ExchangeRates, enabled: false, store: :ets
 
@@ -31,6 +43,8 @@ config :explorer, Explorer.Counters.AddressesCounter, enabled: false, enable_con
 config :explorer, Explorer.Market.History.Cataloger, enabled: false
 
 config :explorer, Explorer.Tracer, disabled?: false
+
+config :explorer, Explorer.Staking.ContractState, enabled: false
 
 config :logger, :explorer,
   level: :warn,

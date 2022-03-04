@@ -23,7 +23,6 @@ defmodule Indexer.Block.Fetcher do
     ContractCode,
     InternalTransaction,
     ReplacedTransaction,
-    StakingPools,
     Token,
     TokenBalance,
     TokenInstance,
@@ -157,10 +156,8 @@ defmodule Indexer.Block.Fetcher do
            |> AddressCoinBalances.params_set(),
          coin_balances_params_daily_set =
            %{
-             beneficiary_params: MapSet.to_list(beneficiary_params_set),
-             blocks_params: blocks,
-             logs_params: logs,
-             transactions_params: transactions_with_receipts
+             coin_balances_params: coin_balances_params_set,
+             blocks: blocks
            }
            |> AddressCoinBalancesDaily.params_set(),
          beneficiaries_with_gas_payment <-
@@ -306,10 +303,6 @@ defmodule Indexer.Block.Fetcher do
   end
 
   def async_import_token_balances(_), do: :ok
-
-  def async_import_staking_pools do
-    StakingPools.async_fetch()
-  end
 
   def async_import_uncles(%{block_second_degree_relations: block_second_degree_relations}) do
     UncleBlock.async_fetch_blocks(block_second_degree_relations)

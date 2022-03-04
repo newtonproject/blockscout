@@ -1,23 +1,26 @@
 defmodule BlockScoutWeb.LayoutView do
   use BlockScoutWeb, :view
 
+  alias Explorer.{Chain, CustomContractsHelpers}
   alias Plug.Conn
   alias Poison.Parser
 
-  @issue_url "https://github.com/poanetwork/blockscout/issues/new"
+  import BlockScoutWeb.AddressView, only: [from_address_hash: 1]
+
+  @issue_url "https://github.com/blockscout/blockscout/issues/new"
   @default_other_networks [
     %{
       title: "POA",
       url: "https://blockscout.com/poa/core"
     },
     %{
-      title: "POA Sokol",
+      title: "Sokol",
       url: "https://blockscout.com/poa/sokol",
       test_net?: true
     },
     %{
-      title: "xDai",
-      url: "https://blockscout.com/poa/xdai"
+      title: "Gnosis Chain",
+      url: "https://blockscout.com/xdai/mainnet"
     },
     %{
       title: "Ethereum Classic",
@@ -34,12 +37,11 @@ defmodule BlockScoutWeb.LayoutView do
   alias BlockScoutWeb.SocialMedia
 
   def logo do
-    Keyword.get(application_config(), :logo) || "/images/blockscout_logo.svg"
+    Keyword.get(application_config(), :logo)
   end
 
   def logo_footer do
-    Keyword.get(application_config(), :logo_footer) || Keyword.get(application_config(), :logo) ||
-      "/images/blockscout_logo.svg"
+    Keyword.get(application_config(), :logo_footer) || Keyword.get(application_config(), :logo)
   end
 
   def logo_text do
@@ -47,7 +49,7 @@ defmodule BlockScoutWeb.LayoutView do
   end
 
   def subnetwork_title do
-    Keyword.get(application_config(), :subnetwork) || "POA Sokol"
+    Keyword.get(application_config(), :subnetwork) || "Sokol"
   end
 
   def network_title do
@@ -117,7 +119,7 @@ defmodule BlockScoutWeb.LayoutView do
           nil
 
         release_link_env_var == "" || release_link_env_var == nil ->
-          "https://github.com/poanetwork/blockscout/releases/tag/" <> version
+          "https://github.com/blockscout/blockscout/releases/tag/" <> version
 
         true ->
           release_link_env_var
@@ -194,10 +196,16 @@ defmodule BlockScoutWeb.LayoutView do
 
   def other_explorers do
     if Application.get_env(:block_scout_web, :link_to_other_explorers) do
-      Application.get_env(:block_scout_web, :other_explorers, [])
+      decode_other_explorers_json(Application.get_env(:block_scout_web, :other_explorers, []))
     else
       []
     end
+  end
+
+  defp decode_other_explorers_json(data) do
+    Jason.decode!(~s(#{data}))
+  rescue
+    _ -> []
   end
 
   def webapp_url(conn) do

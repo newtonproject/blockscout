@@ -220,6 +220,7 @@ defmodule Explorer.SmartContract.Verifier.ConstructorArguments do
         )
 
       <<>> ->
+        # we should consdider change: use just :false
         check_func.("")
 
       <<_::binary-size(2)>> <> rest ->
@@ -244,8 +245,18 @@ defmodule Explorer.SmartContract.Verifier.ConstructorArguments do
          metadata_hash_prefix
        ) do
     if is_constructor_arguments_still_has_metadata_prefix(constructor_arguments, metadata_hash_prefix) do
-      <<_::binary-size(2)>> <> rest = constructor_arguments
-      extract_constructor_arguments(rest, check_func, contract_source_code, contract_name)
+      {ind, _} = :binary.match(constructor_arguments, metadata_hash_prefix)
+      offset = if ind > 2, do: ind - 2, else: 0
+
+      processed_constructor_arguments =
+        if offset > 0 do
+          <<_::binary-size(offset)>> <> rest = constructor_arguments
+          rest
+        else
+          constructor_arguments
+        end
+
+      extract_constructor_arguments(processed_constructor_arguments, check_func, contract_source_code, contract_name)
     else
       extract_constructor_arguments_check_func(
         constructor_arguments,
@@ -268,8 +279,44 @@ defmodule Explorer.SmartContract.Verifier.ConstructorArguments do
     if check_func_result do
       check_func_result
     else
-      extract_constructor_arguments(filtered_constructor_arguments, check_func, contract_source_code, contract_name)
+      output =
+        extract_constructor_arguments(filtered_constructor_arguments, check_func, contract_source_code, contract_name)
+
+      if output do
+        output
+      else
+        # https://github.com/blockscout/blockscout/pull/4764
+        clean_constructor_arguments =
+          remove_substring_of_require_messages(filtered_constructor_arguments, contract_source_code, contract_name)
+
+        check_func.(clean_constructor_arguments)
+      end
     end
+  end
+
+  defp remove_substring_of_require_messages(constructor_arguments, contract_source_code, contract_name) do
+    require_msgs =
+      contract_source_code
+      |> extract_require_messages_from_constructor(contract_name)
+      |> Enum.filter(fn require_msg -> require_msg != nil end)
+
+    longest_substring_to_delete =
+      Enum.reduce(require_msgs, "", fn msg, best_match ->
+        case String.myers_difference(constructor_arguments, msg) do
+          [{:eq, match} | _] ->
+            if String.length(match) > String.length(best_match) do
+              match
+            else
+              best_match
+            end
+
+          _ ->
+            best_match
+        end
+      end)
+
+    [_, cleaned_constructor_arguments] = String.split(constructor_arguments, longest_substring_to_delete, parts: 2)
+    cleaned_constructor_arguments
   end
 
   def remove_require_messages_from_constructor_arguments(contract_source_code, constructor_arguments, contract_name) do
@@ -335,7 +382,8 @@ defmodule Explorer.SmartContract.Verifier.ConstructorArguments do
 
         assumed_arguments
       rescue
-        _ -> false
+        _ ->
+          false
       end
     end
 

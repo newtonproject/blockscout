@@ -95,6 +95,7 @@ $navbar-logo-width: auto !default;
   .navbar-toggler {
     outline: none;
     color: $primary;
+    padding-right: 0px;
 
     .navbar-toggler-icon {
       background-image: url($header-toggler-icon);
@@ -152,23 +153,38 @@ $navbar-logo-width: auto !default;
     }
 
     @include media-breakpoint-up(xl) {
-      width: 310px;
+      width: 290px;
     }
     @media (min-width: 1366px) {
       width: 380px;
     }
-    @media (min-width: 1440px) {
+    @media (min-width: 1540px) {
       width: 550px;
     }
   }
   .input-group-append {
     height: 38px;
-    left: 0;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     width: 38px;
     z-index: 5;
+
+    &.left {
+      left: 0px;
+    }
+
+    &.right {
+      right: 8px;
+      width: 25px;
+      height: 25px;
+    }
+
+    &.desktop-only {
+      @include media-breakpoint-down(md) {
+        display: none;
+      }
+    }
 
     * {
       fill: $header-textfield-magnifier-color;
@@ -183,22 +199,13 @@ $navbar-logo-width: auto !default;
     justify-content: center;
     padding: 0;
     width: 100%;
-  }
-}
 
-.input-group {
-
-  .awesomplete > ul {
-      overflow-y: auto !important;
-      max-height: 300px !important;
-  }
-
-  .awesomplete mark {
-    background: #feff54 !important;
-  }
-  
-  .awesomplete li:hover mark {
-    background: #feff54 !important;
+    &.border {
+      border-color: $secondary !important;
+      border-radius: 5px;
+      color: $secondary;
+      background-color: $header-textfield-background-color;
+    }
   }
 }
 
@@ -219,12 +226,6 @@ $navbar-logo-width: auto !default;
   }
   .input-group {
     width: 100%;
-
-    .awesomplete {
-      @include media-breakpoint-down(lg) {
-        width: 100%;
-      }
-    }
   }
   .navbar-nav {
     white-space: nowrap;
@@ -247,12 +248,17 @@ $navbar-logo-width: auto !default;
 
 .logo-text {
   color: #333;
-  font-size: 0.7rem;
+  font-size: 1rem;
+  font-weight: 700;
   margin-left: 5px;
   line-height: 28px;
 
-  &.footer {
+  &.in-footer {
     color: #fff;
+  }
+
+  &.no-logo {
+    margin-left: 0px;
   }
 }
 
@@ -277,7 +283,7 @@ $navbar-logo-width: auto !default;
 }
 
 .navbar-container, .navbar-primary {
-  @include media-breakpoint-up(xl) {
+  @media (min-width: 992px) {
     padding-right: 0;
   }
 }

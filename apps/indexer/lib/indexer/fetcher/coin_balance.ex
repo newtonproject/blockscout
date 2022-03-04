@@ -79,7 +79,7 @@ defmodule Indexer.Fetcher.CoinBalance do
 
     unique_filtered_entries =
       Enum.filter(unique_entries, fn {_hash, block_number} ->
-        block_number >= first_block_to_index()
+        block_number >= EthereumJSONRPC.first_block_to_fetch(:trace_first_block)
       end)
 
     unique_entry_count = Enum.count(unique_filtered_entries)
@@ -103,15 +103,6 @@ defmodule Indexer.Fetcher.CoinBalance do
         )
 
         {:retry, unique_filtered_entries}
-    end
-  end
-
-  defp first_block_to_index do
-    string_value = Application.get_env(:indexer, :first_block)
-
-    case Integer.parse(string_value) do
-      {integer, ""} -> integer
-      _ -> 0
     end
   end
 
@@ -151,25 +142,32 @@ defmodule Indexer.Fetcher.CoinBalance do
 
     block_timestamp_map =
       Enum.reduce(block_numbers, %{}, fn block_number, map ->
-        {:ok, %Blocks{blocks_params: [%{timestamp: timestamp}]}} =
-          EthereumJSONRPC.fetch_blocks_by_range(block_number..block_number, json_rpc_named_arguments)
+        case EthereumJSONRPC.fetch_blocks_by_range(block_number..block_number, json_rpc_named_arguments) do
+          {:ok, %Blocks{blocks_params: [%{timestamp: timestamp}]}} ->
+            day = DateTime.to_date(timestamp)
+            Map.put(map, "#{block_number}", day)
 
-        day = DateTime.to_date(timestamp)
-        Map.put(map, "#{block_number}", day)
+          _ ->
+            %{}
+        end
       end)
 
     importable_balances_daily_params =
       params_list
       |> Enum.map(fn balance_param ->
-        day = Map.get(block_timestamp_map, "#{balance_param.block_number}")
+        if Map.has_key?(block_timestamp_map, "#{balance_param.block_number}") do
+          day = Map.get(block_timestamp_map, "#{balance_param.block_number}")
 
-        incoming_balance_daily_param = %{
-          address_hash: balance_param.address_hash,
-          day: day,
-          value: balance_param.value
-        }
+          incoming_balance_daily_param = %{
+            address_hash: balance_param.address_hash,
+            day: day,
+            value: balance_param.value
+          }
 
-        incoming_balance_daily_param
+          incoming_balance_daily_param
+        else
+          nil
+        end
       end)
 
     addresses_params = balances_params_to_address_params(importable_balances_params)
@@ -228,9 +226,9 @@ defmodule Indexer.Fetcher.CoinBalance do
   end
 
   defp run_fetched_balances(%FetchedBalances{errors: errors} = fetched_balances, _) do
-    {:ok, imported} = import_fetched_balances(fetched_balances)
-
-    Accounts.drop(imported[:addresses])
+    with {:ok, imported} <- import_fetched_balances(fetched_balances) do
+      Accounts.drop(imported[:addresses])
+    end
 
     retry(errors)
   end

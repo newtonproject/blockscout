@@ -232,7 +232,7 @@
                 call.valueBigInt = bigInt.zero;
                 break;
             default:
-                throw "Unknown custom call op " + op;
+                throw 'Unknown custom call op ' + op;
         }
 
         this.callStack.push(call);

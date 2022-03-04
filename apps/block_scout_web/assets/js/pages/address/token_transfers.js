@@ -6,6 +6,7 @@ import { subscribeChannel } from '../../socket'
 import { connectElements } from '../../lib/redux_helpers.js'
 import { createAsyncLoadStore } from '../../lib/async_listing_load'
 import '../address'
+import { isFiltered } from './utils'
 
 export const initialState = {
   addressHash: null,
@@ -48,12 +49,31 @@ export function reducer (state, action) {
 const elements = {
   '[data-selector="channel-disconnected-message"]': {
     render ($el, state) {
-      if (state.channelDisconnected) $el.show()
+      if (state.channelDisconnected && !window.loading) $el.show()
+    }
+  },
+  '[data-test="filter_dropdown"]': {
+    render ($el, state) {
+      if (state.emptyResponse && !state.isSearch) {
+        if (isFiltered(state.filter)) {
+          $el.addClass('no-rm')
+        } else {
+          return $el.hide()
+        }
+      } else {
+        $el.removeClass('no-rm')
+      }
+
+      return $el.show()
     }
   }
 }
 
 if ($('[data-page="address-token-transfers"]').length) {
+  window.onbeforeunload = () => {
+    window.loading = true
+  }
+
   const store = createAsyncLoadStore(reducer, initialState, 'dataset.identifierHash')
   const addressHash = $('[data-page="address-details"]')[0].dataset.pageAddressHash
   const { filter, blockNumber } = humps.camelizeKeys(URI(window.location).query(true))
