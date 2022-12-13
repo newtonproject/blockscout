@@ -26,7 +26,7 @@ openssl rand -hex 64
 <secret_key>
 ```
 
-#### 1.2 Add SECRET_KEY_BASE docker-compose-xxx.yml
+#### 1.2 Add SECRET_KEY_BASE to docker-compose-xxx.yml
 
 ```yaml
 services:
