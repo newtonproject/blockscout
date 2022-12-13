@@ -17,7 +17,28 @@ This command uses by-default `docker-compose.yml`, which build the explorer into
 - and the BlockScout explorer at http://localhost:4000
 
 ## Configs for different Ethereum clients
+### 1. Configuring SECRET_KEY_BASE
+
+#### 1.1 Generate a secret key
+
+```bash
+openssl rand -hex 64
+<secret_key>
+```
+
+#### 1.2 Add SECRET_KEY_BASE docker-compose-xxx.yml
+
+```yaml
+services:
+  blockscout:
+    environment:
+        SECRET_KEY_BASE: <secret_key>
+```
+
+### 2. Run the blockscout with Compose
+
 Also, the repo contains built-in configs for different clients without need to build the image
+
 - Ganache: `docker-compose -f docker-compose-no-build-ganache.yml up -d`
 - HardHat network: `docker-compose -f docker-compose-no-build-hardhat-network.yml up -d`
 - Geth: `docker-compose -f docker-compose-no-build-geth.yml up -d`
