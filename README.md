@@ -31,10 +31,10 @@ BlockScout supports a number of projects. Hosted instances include POA Network, 
 ## Getting Started
 
 See the [project documentation](https://docs.blockscout.com/) for instructions:
-- [Requirements](https://docs.blockscout.com/for-developers/information-and-settings/requirements)
+- [Requirements](https://docs.blockscout.com/setup/requirements)
 - [Ansible deployment](https://docs.blockscout.com/for-developers/ansible-deployment)
 - [Manual deployment](https://docs.blockscout.com/for-developers/manual-deployment)
-- [ENV variables](https://docs.blockscout.com/for-developers/information-and-settings/env-variables)
+- [ENV variables](https://docs.blockscout.com/setup/env-variables)
 - [Configuration options](https://docs.blockscout.com/for-developers/configuration-options)
 
 
