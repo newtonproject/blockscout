@@ -17,7 +17,7 @@
 
     <div class="row">
       <div class="col-xs-12 col-lg-3">
-        <p class="footer-info-text"><%= gettext("Newton Explorer is a Block Explorer and Analytics Platform for Newton NewChain Networks.") %></p>
+        <p class="footer-info-text"><%= gettext("AB Explorer is a Block Explorer and Analytics Platform for AB Networks.") %></p>
         <div class="footer-social-icons">
           <a href="https://github.com/newtonproject/blockscout" rel="noreferrer" target="_blank" class="footer-social-icon" title='<%= gettext("Github") %>'>
             <i class="fab fa-github"></i>
@@ -32,11 +32,11 @@
       </div>
 
       <div class="col-xs-12 col-md-4 col-lg-<%= col_size %> footer-list">
-        <h3>Newton Project</h3>
+        <h3>AB Project</h3>
         <ul>
-          <li><a href="https://newtonproject.org" rel="noreferrer" class="footer-link"><%= gettext("Newton Project Website") %></a></li>
-          <li><a href="https://developer.newtonproject.org" rel="noreferrer" class="footer-link"><%= gettext("Developer Website") %></a></li>
-          <li><a href="https://newtonproject.org/contact" rel="noreferrer" class="footer-link"><%= gettext("Contact Team") %></a></li>
+          <li><a href="https://ab.org" rel="noreferrer" class="footer-link"><%= gettext("AB Website") %></a></li>
+          <li><a href="https://docs.newtonproject.org/docs/" rel="noreferrer" class="footer-link"><%= gettext("Developer Website") %></a></li>
+          <li><a href="https://ab.org/contact" rel="noreferrer" class="footer-link"><%= gettext("Contact Team") %></a></li>
         </ul>
       </div>
       <% main_nets = main_nets(other_networks()) %>
@@ -79,7 +79,7 @@
 
     <div class="row">
       <div class="col-xs-12 col-md-12 col-lg-12">
-        <p class="footer-blockscout-text"><%= gettext("Newton Explorer is developed based on open-source project BlockScout") %></p>
+        <p class="footer-blockscout-text"><%= gettext("AB Explorer is developed based on open-source project BlockScout") %></p>
       </div>
     </div>
 

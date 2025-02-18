@@ -56,7 +56,7 @@ defmodule Explorer.ExchangeRates.Source do
   @callback source_url(String.t()) :: String.t() | :ignore
 
   def headers do
-    [{"Content-Type", "application/json"}]
+    [{"Content-Type", "application/json"}, {"User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36"}]
   end
 
   def decode_json(data) do
